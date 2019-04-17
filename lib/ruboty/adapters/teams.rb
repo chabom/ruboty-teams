@@ -26,7 +26,7 @@ module Ruboty
       def say(message)
         @res = {
           type: "message",
-          text: message[:code] ? "<pre>#{message[:body]}</pre>" : message[:body]
+          text: message[:code] ? "<pre>#{message[:body]}</pre>" : format(message[:body])
         }
       end
 
@@ -102,6 +102,13 @@ module Ruboty
           text: '@' + HTMLEntities.new.decode(Sanitize.fragment(json['text'])).strip,
           id: json['id'],
         }
+      end
+
+      def format(text)
+        text
+          .gsub(/```\n?(.+?)\n?```/m, '<pre>\1</pre>')
+          .gsub(/\n/, '<br>')
+          .gsub(URI.regexp, '[\0](\0)')
       end
     end
   end
