@@ -24,9 +24,17 @@ module Ruboty
       end
 
       def say(message)
+        body = if message[:formatted]
+                 message[:body]
+               elsif message[:code]
+                 "<pre>#{message[:body]}</pre>"
+               else
+                 format(message[:body])
+               end
+
         @res = {
           type: "message",
-          text: message[:code] ? "<pre>#{message[:body]}</pre>" : format(message[:body])
+          text: body,
         }
       end
 
