@@ -107,7 +107,7 @@ module Ruboty
       def parse_content(body)
         json = JSON.parse(body)
         {
-          text: '@' + HTMLEntities.new.decode(Sanitize.fragment(json['text'])).strip,
+          text: '@' + HTMLEntities.new.decode(Sanitize.fragment(json['text'])).gsub(/\xC2\xA0/, ' ').strip,
           id: json['id'],
         }
       end
