@@ -31,7 +31,6 @@ module Ruboty
                else
                  format(message[:body])
                end
-
         @res = {
           type: "message",
           text: body,
@@ -60,6 +59,7 @@ module Ruboty
 
             robot.receive(
               body: message[:text],
+              from: message[:from],
               message_id: message[:id],
             )
             res.body = @res.to_json
@@ -108,6 +108,7 @@ module Ruboty
         json = JSON.parse(body)
         {
           text: '@' + HTMLEntities.new.decode(Sanitize.fragment(json['text'])).gsub(/\xC2\xA0/, ' ').strip,
+          from: json['from']['name'],
           id: json['id'],
         }
       end
