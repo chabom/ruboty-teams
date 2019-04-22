@@ -117,7 +117,7 @@ module Ruboty
         text
           .gsub(/```\n?(.+?)\n?```/m, '<pre>\1</pre>')
           .gsub(/\n/, '<br>')
-          .gsub(URI.regexp, '[\0](\0)')
+          .gsub(URI::DEFAULT_PARSER.make_regexp(%w[http https]), '[\0](\0)')
       end
     end
   end
