@@ -97,9 +97,12 @@ module Ruboty
         ENV["TEAMS_SERVER_ENDPOINT"] ||= '/webhooks'
       end
 
+      def secret
+        ENV["TEAMS_SECURITY_TOKEN"].unpack("m")[0]
+      end
+
       def auth?(text, hmac)
         return if hmac.nil?
-        secret = ENV["TEAMS_SECURITY_TOKEN"].unpack("m")[0]
         hash = Base64.encode64(OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha256'), secret, text)).strip
         "HMAC #{hash}" == hmac
       end
