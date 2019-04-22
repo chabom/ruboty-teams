@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Microsoft Teams adapter for Ruboty.'
   spec.description   = spec.summary
-  spec.homepage      = 'https://github.com/chabom/ruboty_teams'
+  spec.homepage      = 'https://github.com/chabom/ruboty-teams'
   spec.license       = "MIT"
 
   # Specify which files should be added to the gem when it is released.
